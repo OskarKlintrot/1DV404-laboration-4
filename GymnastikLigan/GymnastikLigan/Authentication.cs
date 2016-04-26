@@ -47,5 +47,11 @@ namespace GymnastikLigan
             LoggedIn = User.validatePassword(password) && User.validateUsername(username);
             return LoggedIn;
         }
+
+        public static bool Logout()
+        {
+            LoggedIn = false;
+            return true;
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace UnitTestProject
 
             Assert.IsTrue(user.validateUsername(username), "Användarnamnet är fel.");
             Assert.IsFalse(user.validateUsername($"fel {username}"), "Användarnamnet är fel.");
+            Assert.IsTrue(user.validateUsername(username.ToLower()), "Användarnamnet är fel.");
+            Assert.IsFalse(user.validateUsername($"fel {username.ToLower()}"), "Användarnamnet är fel.");
 
             #endregion
         }
@@ -51,6 +53,8 @@ namespace UnitTestProject
 
             Assert.IsTrue(user.validatePassword(password), "Rätt lösenord resulterade i ett fel");
             Assert.IsFalse(user.validatePassword($"fel {password}"), "Fel lösenord validerades som rätt");
+            Assert.IsTrue(user.validatePassword(password.ToLower()), "Rätt lösenord resulterade i ett fel");
+            Assert.IsFalse(user.validatePassword($"fel {password.ToLower()}"), "Fel lösenord validerades som rätt");
 
             #endregion
         }

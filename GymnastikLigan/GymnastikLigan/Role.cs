@@ -11,6 +11,6 @@ namespace GymnastikLigan
         superadmin,
         secretary,
         teamLeader,
-        competitor
+        gymnast
     }
 }

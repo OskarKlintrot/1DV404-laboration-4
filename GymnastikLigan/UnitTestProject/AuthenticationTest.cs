@@ -8,7 +8,7 @@ namespace UnitTestProject
     public class AuthenticationTest
     {
         [TestMethod]
-        public void TestSetUser()
+        public void SetUser()
         {
             #region Initiate
 
@@ -39,7 +39,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestLogin()
+        public void Login()
         {
             #region Initiate
 
@@ -61,6 +61,31 @@ namespace UnitTestProject
             Assert.IsFalse(Authentication.Login(username, $"fel {password}"), "Användaren kunde logga in med fel lösenord");
             Assert.IsFalse(Authentication.Login($"fel {username}", password), "Användaren kunde logga in med fel användarnamn");
             Assert.IsFalse(Authentication.Login($"fel {username}", $"fel {password}"), "Användaren kunde logga in med fel användarnamn och lösenord");
+
+            #endregion
+        }
+
+        [TestMethod]
+        public void Logout()
+        {
+            #region Initiate
+
+            var username = "LisaSmurf";
+            var password = "hemligt";
+            var role = Role.secretary;
+            var user = new User(username, password, role);
+            Authentication.SetUser(user);
+            Authentication.Login(username, password);
+
+            #endregion
+
+            #region Test
+
+            #endregion
+
+            #region Assert
+
+            Assert.IsTrue(Authentication.Logout(), "Användaren kunde inte logga ut");
 
             #endregion
         }

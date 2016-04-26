@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace GymnastikLigan
 {
-    enum MenuChoice
+    public enum Sport
     {
-        login,
-        quit,
-        logout,
-        showTeams,
-        addTeam,
-        showCompetitions,
-        addCompetition
+        parallelBar,
+        balanceBeam,
+        runningJump,
+        floorExercise
     }
 }

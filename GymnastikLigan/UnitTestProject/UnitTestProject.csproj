@@ -53,6 +53,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AuthenticationTest.cs" />
+    <Compile Include="GymnastUnitTest.cs" />
+    <Compile Include="TeamsUnitTest.cs" />
+    <Compile Include="TeamsGymnastIntegrationTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -21,12 +21,12 @@ namespace GymnastikLigan
 
         public bool validatePassword(string password)
         {
-            return Password == password;
+            return Password.ToLower() == password.ToLower();
         }
 
         public bool validateUsername(string username)
         {
-            return Username == username;
+            return Username.ToLower() == username.ToLower();
         }
     }
 }
