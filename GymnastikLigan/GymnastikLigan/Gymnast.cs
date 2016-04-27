@@ -8,21 +8,23 @@ namespace GymnastikLigan
 {
     public class Gymnast
     {
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            private set
-            {
-                _name = value;
-            }
-        }
+        public string Name { get; private set; }
+        public Dictionary<Sport, double> Sports { get; private set; }
+
         public Gymnast(string name)
         {
+            Sports = new Dictionary<Sport, double>();
             Name = name;
+
+            foreach (Sport sport in Enum.GetValues(typeof(Sport)))
+            {
+                Sports.Add(sport, 0);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

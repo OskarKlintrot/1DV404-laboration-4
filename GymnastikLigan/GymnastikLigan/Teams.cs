@@ -8,34 +8,31 @@ namespace GymnastikLigan
 {
     public class Teams
     {
-        private Dictionary<String, List<Gymnast>> _teams = new Dictionary<string, List<Gymnast>>(StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<String, List<Gymnast>> AllTeams { get; private set; }
 
-        public Dictionary<String, List<Gymnast>> AllTeams
+        public Teams()
         {
-            get
-            {
-                return _teams;
-            }
+            AllTeams = new Dictionary<string, List<Gymnast>>(StringComparer.InvariantCultureIgnoreCase);
         }
 
         public void AddTeam(string team)
         {
-            _teams.Add(team, new List<Gymnast>());
+            AllTeams.Add(team, new List<Gymnast>());
         }
 
         public void AddGymnastToTeam(string team, Gymnast gymnast)
         {
-            _teams[team].Add(gymnast);
+            AllTeams[team].Add(gymnast);
         }
 
         public bool ContainsTeam(string team)
         {
-            return _teams.ContainsKey(team);
+            return AllTeams.ContainsKey(team);
         }
 
         public string GetExactTeamName(string team)
         {
-            return _teams.Keys.Where(k => k.ToLower() == team).FirstOrDefault();
+            return AllTeams.Keys.Where(k => k.ToLower() == team).FirstOrDefault();
         }
 
         public override string ToString()

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GymnastikLigan
 {
     class Program
     {
+        private static Regex _yOrN = new Regex("^(y|n){1}$", RegexOptions.IgnoreCase);
         static void Main(string[] args)
         {
             var teams = InstanziateProject();
@@ -31,6 +33,7 @@ namespace GymnastikLigan
                         ShowTeams(teams);
                         break;
                     case MenuChoice.addTeam:
+                        AddNewTeam(teams);
                         break;
                     case MenuChoice.showCompetitions:
                         break;
@@ -43,23 +46,77 @@ namespace GymnastikLigan
             }
         }
 
-        private static string ShowTeams(Teams teams)
+        private static void AddNewTeam(Teams teams)
         {
-            Console.Clear();
+            Console.Write("Ange lagets namn: ");
+            var newTeam = Console.ReadLine();
+            string save;
+            do
+            {
+                Console.WriteLine($"Vill du spara \"{newTeam}\" y/n?");
+                save = Console.ReadLine();
+                if (!_yOrN.IsMatch(save))
+                    Console.Write($"Du kan bara använda \"y\" eller \"n\"! ");
+            } while (!_yOrN.IsMatch(save));
+            if (save[0] == 'y')
+            {
+                teams.AddTeam(newTeam);
+                Console.WriteLine($"Det nya laget sparades! {StringResources._continue}");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine($"Laget sparades inte. {StringResources._continue}");
+                Console.ReadKey();
+            }
+        }
+
+        private static void ShowTeams(Teams teams)
+        {
             Console.WriteLine(teams.ToString());
             Console.WriteLine("För att lägga till eller visa spelare för ett lag, skriv lagets namn. \nAnnars tryck enter för att återgå till startmenyn.");
-            var choice = Console.ReadLine();
-            while (!teams.ContainsTeam(choice))
+            var choosedTeam = Console.ReadLine();
+            while (!teams.ContainsTeam(choosedTeam))
             {
-                if (String.IsNullOrWhiteSpace(choice)) return "";
-
                 Console.WriteLine("Laget hittades inte, försök igen.");
-                choice = Console.ReadLine();
+                choosedTeam = Console.ReadLine();
             }
-            Console.WriteLine($"Du valde {teams.GetExactTeamName(choice)}");
-            Console.WriteLine(StringResources._continue);
+            Console.WriteLine($"Du valde {teams.GetExactTeamName(choosedTeam)}");
+            Console.WriteLine("Lagets gymnaster är: ");
+            foreach (var player in teams.AllTeams[choosedTeam])
+            {
+                Console.WriteLine(player.ToString());
+            }
+            Console.Write("Vill du lägga till en ny gymnast? y/n: ");
+            string save;
+            do
+            {
+                save = Console.ReadLine();
+                if (!_yOrN.IsMatch(save))
+                    Console.Write($"Du kan bara använda \"y\" eller \"n\"! ");
+                else if (save[0] == 'n')
+                    return;
+            } while (!_yOrN.IsMatch(save));
+            Console.Write("Ange namnet på den gymnast du vill lägga till: ");
+            var newGymnast = Console.ReadLine();
+            save = "";
+            do
+            {
+                Console.Write($"Vill du spara \"{newGymnast}\"? y/n: ");
+                save = Console.ReadLine();
+                if (!_yOrN.IsMatch(save))
+                    Console.Write($"Du kan bara använda \"y\" eller \"n\": ");
+            } while (!_yOrN.IsMatch(save));
+            if (save[0] == 'y')
+            {
+                teams.AddGymnastToTeam(choosedTeam, new Gymnast(newGymnast));
+                Console.WriteLine($"Den nya gymnasten sparades! {StringResources._continue}");
+            }
+            else
+            {
+                Console.WriteLine($"Gymnasten sparades inte. {StringResources._continue}");
+            }
             Console.ReadKey();
-            return choice;
         }
 
         private static Teams InstanziateProject()
