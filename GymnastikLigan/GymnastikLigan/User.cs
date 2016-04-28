@@ -14,6 +14,7 @@ namespace GymnastikLigan
 
         public User(string username, string password, Role role)
         {
+            if (String.IsNullOrEmpty(username)) throw new ArgumentException();
             Username = username;
             Password = password;
             Role = role;

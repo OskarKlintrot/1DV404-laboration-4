@@ -44,7 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication.cs" />
+    <Compile Include="Competition.cs" />
+    <Compile Include="Competitions.cs" />
     <Compile Include="Gymnast.cs" />
+    <Compile Include="ICompetition.cs" />
+    <Compile Include="ICompetitions.cs" />
+    <Compile Include="IGymnast.cs" />
+    <Compile Include="ITeam.cs" />
+    <Compile Include="ITeams.cs" />
     <Compile Include="MenuChoice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Team.cs" />
     <Compile Include="Teams.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

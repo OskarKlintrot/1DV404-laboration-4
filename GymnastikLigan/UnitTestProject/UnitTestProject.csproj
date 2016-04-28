@@ -56,6 +56,10 @@
     <Compile Include="GymnastUnitTest.cs" />
     <Compile Include="TeamsUnitTest.cs" />
     <Compile Include="TeamsGymnastIntegrationTest.cs" />
+    <Compile Include="CompetitionUnitTest.cs" />
+    <Compile Include="CompetitionTeamGymnastIntegrationTest.cs" />
+    <Compile Include="TeamUnitTest.cs" />
+    <Compile Include="CompetitionsUnitTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

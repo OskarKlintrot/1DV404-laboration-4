@@ -47,11 +47,12 @@ namespace UnitTestProject
             var password = "hemligt";
             var role = Role.secretary;
             var user = new User(username, password, role);
-            Authentication.SetUser(user);
 
             #endregion
 
             #region Test
+
+            Authentication.SetUser(user);
 
             #endregion
 
@@ -74,18 +75,21 @@ namespace UnitTestProject
             var password = "hemligt";
             var role = Role.secretary;
             var user = new User(username, password, role);
+            
+            #endregion
+
+            #region Test
+
             Authentication.SetUser(user);
             Authentication.Login(username, password);
 
             #endregion
 
-            #region Test
-
-            #endregion
-
             #region Assert
 
-            Assert.IsTrue(Authentication.Logout(), "Användaren kunde inte logga ut");
+            Assert.IsTrue(Authentication.LoggedIn, "Användaren kunde inte logga in");
+            Authentication.Logout();
+            Assert.IsFalse(Authentication.LoggedIn, "Användaren kunde inte logga ut");
 
             #endregion
         }

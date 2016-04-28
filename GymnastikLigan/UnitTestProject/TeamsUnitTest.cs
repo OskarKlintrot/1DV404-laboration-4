@@ -18,42 +18,54 @@ namespace UnitTestProject
         [TestMethod]
         public void AddTeams()
         {
-            var teams = new Teams();
             var name = "Smurfarna";
-            teams.AddTeam(name);
-            Assert.IsTrue(teams.AllTeams[name].Count == 0);
+            var team = new Team(name);
+            var teams = new Teams();
+            teams.AddTeam(team);
+            Assert.IsTrue(teams.GetTeam(name).Gymnasts.Count == 0);
             try
             {
-                teams.AllTeams[$"fel {name}"].ToString();
+                teams.GetTeam($"fel {name}").ToString();
                 Assert.Fail("Inget undantag kastades");
             }
             catch (KeyNotFoundException e)
             {
                 Assert.IsNotNull(e);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Assert.Fail(e.Message.ToString());
             }
         }
 
         [TestMethod]
         public void ValidateTeam()
         {
-            var teams = new Teams();
             var name = "Smurfarna";
+            var team = new Team(name);
+            var teams = new Teams();
             Assert.IsFalse(teams.ContainsTeam(name.ToLower()));
-            teams.AddTeam(name);
+            teams.AddTeam(team);
             Assert.IsTrue(teams.ContainsTeam(name.ToLower()));
         }
 
         [TestMethod]
         public void GetExactTeamName()
         {
-            var teams = new Teams();
             var name = "Smurfarna";
-            teams.AddTeam(name);
+            var team = new Team(name);
+            var teams = new Teams();
+            teams.AddTeam(team);
             Assert.IsTrue(teams.GetExactTeamName(name.ToLower()) == name);
+        }
+
+        [TestMethod]
+        public void GetTeam()
+        {
+            var name = "Smurfarna";
+            var team = new Team(name);
+            var teams = new Teams();
+            teams.AddTeam(team);
+            Assert.IsTrue(teams.GetTeam(name) == team);
         }
     }
 }
