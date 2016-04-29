@@ -35,6 +35,49 @@ namespace UnitTestProject
             catch (Exception)
             {
             }
+
+            try
+            {
+                teams.AddTeam(team);
+                throw new Exception();
+            }
+            catch (ArgumentException)
+            {
+
+            }
+            catch (Exception)
+            {
+                Assert.Fail("Fel undantag kastades");
+            }
+        }
+
+        [TestMethod]
+        public void AddGymnastToTeam()
+        {
+            var teamName = "Smurfarna";
+            var gymnastName = "Smurfarna";
+            var gymnast = new Gymnast(gymnastName);
+            var team = new Team(teamName);
+            var teams = new Teams();
+            var competition = new Competition(teamName, teams);
+            var competitions = new Competitions();
+
+            teams.AddTeam(team);
+
+            try
+            {
+                teams.AddGymnastToTeam(teamName, gymnast);
+                teams.AddGymnastToTeam(teamName, gymnast);
+                throw new Exception();
+            }
+            catch (ArgumentException)
+            {
+
+            }
+            catch (Exception)
+            {
+                Assert.Fail("Fel undantag kastades");
+            }
         }
 
         [TestMethod]

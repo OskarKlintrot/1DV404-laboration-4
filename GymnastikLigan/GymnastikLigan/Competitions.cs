@@ -17,12 +17,14 @@ namespace GymnastikLigan
 
         public void AddCompetition(ICompetition competition)
         {
+            if (AllCompetitions.FindIndex(c => c.Name.ToLower() == competition.Name.ToLower()) > -1) throw new ArgumentException("The competition already exists.");
             AllCompetitions.Add(competition);
         }
 
         public void AddTeamToCompetition(string competition, string team)
         {
-            if (!ContainsCompetition(competition)) return;
+            if (!ContainsCompetition(competition)) throw new ArgumentOutOfRangeException("The competition doesn't exist.");
+            if (AllCompetitions.Exists(c => c.Teams.Exists(t => t.ToLower() == team.ToLower()))) throw new ArgumentException("The team already exists.");
 
             AllCompetitions
                 .Find(t => t.Name.ToLower() == competition.ToLower())
@@ -54,7 +56,7 @@ namespace GymnastikLigan
 
         public override string ToString()
         {
-            string competitions = "Tävlingar:\n";
+            string competitions = $"Tävlingar:{Environment.NewLine}";
 
             foreach (var competition in AllCompetitions)
             {

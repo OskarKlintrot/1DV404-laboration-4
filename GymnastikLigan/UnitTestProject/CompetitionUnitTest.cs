@@ -10,6 +10,15 @@ namespace UnitTestProject
         [TestMethod]
         public void CreateNewCompetition()
         {
+            try
+            {
+                var teams = new Teams();
+                var competition = new Competition("Gargamel", teams);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
         }
     }
 }

@@ -17,12 +17,14 @@ namespace GymnastikLigan
 
         public void AddTeam(ITeam team)
         {
+            if (AllTeams.FindIndex(t => t.Name.ToLower() == team.Name.ToLower()) > -1) throw new ArgumentException("The team already exists.");
             AllTeams.Add(team);
         }
 
         public void AddGymnastToTeam(string team, IGymnast gymnast)
         {
-            if (!ContainsTeam(team)) return;
+            if (!ContainsTeam(team)) throw new ArgumentOutOfRangeException("The gymnast doesn't exist.");
+            if (AllTeams.Find(t => t.Name.ToLower() == team.ToLower()).Gymnasts.Exists(g => g.Name.ToLower() == gymnast.Name.ToLower())) throw new ArgumentException("The gymnast already exists.");
 
             AllTeams
                 .Find(t => t.Name.ToLower() == team.ToLower())
