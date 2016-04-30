@@ -18,7 +18,6 @@ namespace GymnastikLigan
             InstanziateProject(teams, competitions);
 
             Authentication.SetUser(CreateFirstUser());
-            Authentication.Login("LisaSmurf", "hemligt");
 
             var choice = GetMenuChoice();
             while (choice != MenuChoice.quit)
@@ -274,6 +273,10 @@ namespace GymnastikLigan
             Console.Clear();
             Console.WriteLine("#################################");
             Console.WriteLine("#             LOGGA IN          #");
+            Console.WriteLine("#                               #");
+            Console.WriteLine("# Användarnamn: LisaSmurf       #");
+            Console.WriteLine("# Lösenord:     hemligt         #");
+            Console.WriteLine("#                               #");
             Console.WriteLine("#################################");
 
             do
